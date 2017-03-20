@@ -1,5 +1,14 @@
 <div class="compact">
   <div class="container">
-    Hoi compact view
+    <h1>Docker Compose files</h1>
+  </div>
+  <div class="container">
+    {{#md-card-collapsible}}
+      {{#each model as |dockerCompose|}}
+        {{#md-collapsible title=dockerCompose.title}}
+          {{dockerCompose.text}}
+        {{/md-collapsible}}
+      {{/each}}
+      {{/md-card-collapsible}}
   </div>
 </div>
