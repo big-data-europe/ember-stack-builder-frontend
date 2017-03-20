@@ -3,3 +3,7 @@ $roboto-font-path: '../assets/';
 
 // Materialize styles
 @import "materialize";
+
+// import custom files
+@import 'app/styles/default.scss';
+@import 'app/styles/compact.scss';
