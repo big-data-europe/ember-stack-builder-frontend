@@ -7,17 +7,17 @@
     <div class="row">
       <div class="search">
         <i class="material-icons">search</i>
-        <input type="text" oninput= {{perform dockerList value="target.value"}} placeholder="Search" />
+        {{input type="type" value=searchValue }}
       </div>
     </div>
   </div>
 
   <div class="container">
-    {{#if dockerList.isRunning}}
+    {{#if model.isRunning}}
       {{md-loader mode="circular"}}
     {{else}}
       <ul class="collection">
-        {{#each model as |dockerCompose|}}
+        {{#each model.lastSuccessful.value  as |dockerCompose|}}
           <li class='collection-item'>
             {{dockerCompose.title}}
           </li>
