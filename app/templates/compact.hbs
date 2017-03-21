@@ -2,8 +2,16 @@
   <div class="container">
     <h1>Docker Compose files</h1>
   </div>
-  <div class="container">
 
+  <div class="container">
+    <div class="row">
+      <div class="search">
+        {{md-input value=searchValue label="Search" icon="search" class="col s12"}}
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
     <ul class="list">
       {{#md-collection content=model as |dockerCompose|}}
         <li class='collection-item'>
@@ -11,10 +19,11 @@
         </li>
       {{/md-collection}}
     </ul>
+  </div>
 
+  <div class="container">
     <div class="floating-btn">
       {{md-btn icon='add' action='addNewFile' buttonType='floating' class='btn-large'}}
     </div>
-
   </div>
 </div>
