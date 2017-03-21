@@ -17,7 +17,7 @@
       {{md-loader mode="circular"}}
     {{else}}
       <ul class="collection">
-        {{#each dockerList.lastSuccessful.value as |dockerCompose|}}
+        {{#each model as |dockerCompose|}}
           <li class='collection-item'>
             {{dockerCompose.title}}
           </li>

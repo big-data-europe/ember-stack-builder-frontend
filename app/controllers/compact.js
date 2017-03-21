@@ -4,10 +4,12 @@ import { task, timeout } from 'ember-concurrency';
 
 const DEBOUNCE_MS = 250;
 export default Ember.Controller.extend({
+  searchValue: "",
 
   dockerList: task(function*(term) {
     if (Ember.isBlank(term)) {
-      return this.get('model');
+      this.set('searchValue', "");
+      return;
     }
 
     // Pause here for DEBOUNCE_MS milliseconds. Because this
@@ -16,19 +18,9 @@ export default Ember.Controller.extend({
     // start over from the beginning. This is the
     // ember-concurrency way of debouncing a task.
     yield timeout(DEBOUNCE_MS);
-
-    return yield this.filterDockerList(term);
-  }).on('init').restartable(),
-
-  filterDockerList: function(searchValue) {
-    var params = {
-      sort: 'title',
-      filter: {
-        title: searchValue
-      }
-    };
-    return this.get('store').query('docker-compose', params);
-  },
+    this.set('searchValue', term);
+    return;
+  }).restartable(),
 
   actions: {
     addNewFile: function() {
