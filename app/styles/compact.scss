@@ -6,25 +6,54 @@
 
     .search {
       i {
+        margin-left: 1%;
+        font-size: 24px;
         color: $secondary-color;
+        display: inline-block;
+      }
+
+      input {
+        display: inline-block;
+        width: 95%;
       }
     }
 
-    ul {
-      &.list {
-        li {
-          &:hover {
-            cursor: pointer;
-            background: #ddd;
-          }
+    .preloader-wrapper {
+      margin-left: 50%;
+
+      .spinner-layer {
+        border-color: $primary-color;
+
+        &.spinner-green,
+        &.spinner-yellow {
+          border-color: $secondary-color;
+        }
+      }
+    }
+
+    ul.collection {
+      li.collection-item {
+        &:hover {
+          cursor: pointer;
+          background: #ddd;
+        }
+
+        &.empty-text {
+          font-style: italic;
         }
       }
     }
 
     .floating-btn {
       float: right;
+
       a {
         background-color: $secondary-color;
+
+        &:hover {
+          background-color: $primary-color;
+          opacity: 0.5;
+        }
       }
     }
   }

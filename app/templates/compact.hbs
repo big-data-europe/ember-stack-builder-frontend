@@ -6,19 +6,28 @@
   <div class="container">
     <div class="row">
       <div class="search">
-        {{md-input value=searchValue label="Search" icon="search" class="col s12"}}
+        <i class="material-icons">search</i>
+        <input type="text" oninput= {{perform dockerList value="target.value"}} placeholder="Search" />
       </div>
     </div>
   </div>
 
   <div class="container">
-    <ul class="list">
-      {{#md-collection content=model as |dockerCompose|}}
-        <li class='collection-item'>
-          {{dockerCompose.text}}
-        </li>
-      {{/md-collection}}
-    </ul>
+    {{#if dockerList.isRunning}}
+      {{md-loader mode="circular"}}
+    {{else}}
+      <ul class="collection">
+        {{#each dockerList.lastSuccessful.value as |dockerCompose|}}
+          <li class='collection-item'>
+            {{dockerCompose.title}}
+          </li>
+        {{else}}
+          <li class='collection-item empty-text'>
+            No docker compose file was found
+          </li>
+        {{/each}}
+      </ul>
+    {{/if}}
   </div>
 
   <div class="container">
