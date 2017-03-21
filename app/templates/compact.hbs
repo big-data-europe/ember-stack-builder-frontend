@@ -3,12 +3,18 @@
     <h1>Docker Compose files</h1>
   </div>
   <div class="container">
-    {{#md-card-collapsible}}
-      {{#each model as |dockerCompose|}}
-        {{#md-collapsible title=dockerCompose.title}}
+
+    <ul class="list">
+      {{#md-collection content=model as |dockerCompose|}}
+        <li class='collection-item'>
           {{dockerCompose.text}}
-        {{/md-collapsible}}
-      {{/each}}
-      {{/md-card-collapsible}}
+        </li>
+      {{/md-collection}}
+    </ul>
+
+    <div class="floating-btn">
+      {{md-btn icon='add' action='addNewFile' buttonType='floating' class='btn-large'}}
+    </div>
+
   </div>
 </div>

@@ -1,3 +1,23 @@
 .compact {
-  
+  .container {
+    h1 {
+      text-align: center;
+    }
+
+    ul {
+      &.list {
+        li {
+          &:hover {
+            // opacity: 0.7;
+            cursor: pointer;
+            background: #ddd;
+          }
+        }
+      }
+    }
+
+    .floating-btn {
+      float: right;
+    }
+  }
 }
