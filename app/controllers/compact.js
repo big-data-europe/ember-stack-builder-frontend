@@ -4,8 +4,11 @@ export default Ember.Controller.extend({
   searchValue: "",
 
   actions: {
+    editFile: function(id) {
+      this.transitionToRoute('editor.edit', id);
+    },
     addNewFile: function() {
-      console.log("new");
+      this.transitionToRoute('editor.index');
     }
   }
 });

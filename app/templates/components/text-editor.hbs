@@ -1,0 +1,24 @@
+<div class="text-editor">
+  <div class="container">
+
+    {{#md-card title="Docker Compose File Editor" id="basic-card" }}
+      {{#md-card-content}}
+        <div class="row">
+          {{md-input type="text" value=model.title placeholder="Title" }}
+        </div>
+        <div class="row">
+          {{md-textarea value=model.text placeholder="Text" }}
+        </div>
+
+      {{/md-card-content}}
+      {{#md-card-action}}
+        {{md-btn text='Save' action='save' class='text-editor-btn'}} {{md-btn text='Cancel' action='cancel' class='text-editor-btn'}}
+        {{#if allowDelete}}
+          <div class="delete">
+            {{md-btn text='Delete' action='delete' class='text-editor-btn'}}
+          </div>
+        {{/if}}
+      {{/md-card-action}}
+    {{/md-card}}
+  </div>
+</div>
