@@ -4,3 +4,11 @@ nav {
   background-size: auto 64px;
   background-position: 50px 0;
 }
+
+.card {
+  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.12), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.modal {
+  background-color: transparent;
+  box-shadow: none;
+}

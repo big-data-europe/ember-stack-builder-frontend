@@ -1,24 +1,32 @@
 <div class="text-editor">
   <div class="container">
+    <h2>Docker Compose File Editor</h2>
+  </div>
 
-    {{#md-card title="Docker Compose File Editor" id="basic-card" }}
+  <div class="container">
+    {{#md-card}}
       {{#md-card-content}}
         <div class="row">
-          {{md-input type="text" value=model.title placeholder="Title" }}
+          {{md-input type="text" value=model.title label="Title" }}
         </div>
         <div class="row">
-          {{md-textarea value=model.text placeholder="Text" }}
+          {{md-textarea value=model.text label="Text" }}
         </div>
-
       {{/md-card-content}}
       {{#md-card-action}}
-        {{md-btn text='Save' action='save' class='text-editor-btn'}} {{md-btn text='Cancel' action='cancel' class='text-editor-btn'}}
+        <div class="default-actions">
+          {{md-btn text='Save' action='save'}} {{md-btn text='Cancel' action='cancel'}}
+        </div>
         {{#if allowDelete}}
-          <div class="delete">
-            {{md-btn text='Delete' action='delete' class='text-editor-btn'}}
+          <div class="delete-action">
+            {{md-btn text='Delete' action='showDeleteDialog'}}
           </div>
         {{/if}}
       {{/md-card-action}}
     {{/md-card}}
   </div>
 </div>
+
+{{#if showDialog}}
+  {{confirmation-dialog buttonText='Delete' text="Delete this Docker Compose file?" closeDialog=(action 'closeDialog') action='delete' delete=(action 'delete')}}
+{{/if}}

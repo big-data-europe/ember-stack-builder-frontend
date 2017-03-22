@@ -1,0 +1,10 @@
+{{#md-modal close='closeDialog' targetAttachment="center" translucentOverlay=true }}
+  {{#md-card}}
+    {{#md-card-content}}
+      {{text}}
+    {{/md-card-content}}
+    {{#md-card-action}}
+      {{md-btn text='Cancel' action='closeDialog'}} {{md-btn text=buttonText action='agree'}}
+    {{/md-card-action}}
+  {{/md-card}}
+{{/md-modal}}

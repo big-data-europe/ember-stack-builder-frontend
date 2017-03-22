@@ -1,0 +1,21 @@
+.editor {
+  .text-editor {
+    .container {
+      h2 {
+        text-align: center;
+      }
+    }
+
+    .container {
+      .card-action {
+        .default-actions {
+          display: inline-block;
+        }
+
+        .delete-action {
+          float: right;
+        }
+      }
+    }
+  }
+}
