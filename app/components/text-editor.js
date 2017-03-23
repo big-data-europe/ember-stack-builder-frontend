@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   allowDelete: false,
   showDialog: false,
+  classNames: ['text-editor']
   actions: {
     save: function() {
       this.get('model').save();
