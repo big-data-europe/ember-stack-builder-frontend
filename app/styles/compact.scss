@@ -17,18 +17,8 @@
         width: 95%;
       }
     }
-
     .preloader-wrapper {
       margin-left: 50%;
-
-      .spinner-layer {
-        border-color: $primary-color;
-
-        &.spinner-green,
-        &.spinner-yellow {
-          border-color: $secondary-color;
-        }
-      }
     }
 
     ul.collection {

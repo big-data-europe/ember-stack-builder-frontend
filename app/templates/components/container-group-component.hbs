@@ -1,0 +1,8 @@
+<span class='title'>{{model.title}}</span>
+{{#md-badge class='red darken-4" white-text' }}
+  {{model.containers.length}}
+{{/md-badge}}
+  <p>This group contains the followings:</p>
+{{#md-collection content=model.containers as |container|}}
+  {{container-component model=container}}
+{{/md-collection}}

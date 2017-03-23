@@ -8,7 +8,23 @@ nav {
 .card {
   box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.12), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
+
 .modal {
   background-color: transparent;
   box-shadow: none;
+}
+
+.preloader-wrapper {
+  .spinner-layer {
+    border-color: $primary-color;
+
+    &.spinner-green,
+    &.spinner-yellow {
+      border-color: $secondary-color;
+    }
+  }
+}
+
+html {
+  overflow: scroll;
 }
