@@ -8,6 +8,25 @@
       padding-top: 7%;
 
       .container {
+        textarea {
+          background-color: transparent;
+          border: none;
+          border-bottom: 1px solid #9e9e9e;
+          border-radius: 0;
+          outline: none;
+          resize: none;
+
+          padding: 1.6rem 0;
+          overflow-y: hidden;
+          width: 100%;
+          font-size: 1rem;
+          margin: 0 0 15px 0;
+
+          &:focus {
+            border-bottom: 1px solid #78909c;
+            box-shadow: 0 1px 0 0 #78909c;
+          }
+        }
         .card-action {
           .default-actions {
             display: inline-block;

@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import ResizeTextareaMixin from '../mixins/resize-textarea';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(ResizeTextareaMixin, {
   allowDelete: false,
   showDialog: false,
   classNames: ['text-editor'],
