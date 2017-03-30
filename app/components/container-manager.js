@@ -32,7 +32,7 @@ export default Ember.Component.extend({
       }
     };
     var promises = [];
-    promises.push(this.get('store').query('container', params));
+    promises.push(this.get('store').query('container-item', params));
     promises.push(this.get('store').query('container-group', params));
 
     var results = [];
