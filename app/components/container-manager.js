@@ -10,9 +10,9 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
   classNames: ['container-manager'],
   containerList: task(function*(term) {
-    if (Ember.isBlank(term)) {
-      return this.get('model');
-    }
+    // if (Ember.isBlank(term)) {
+    //   return this.get('model');
+    // }
 
     // Pause here for DEBOUNCE_MS milliseconds. Because this
     // task is `restartable`, if the user starts typing again,
@@ -26,11 +26,18 @@ export default Ember.Component.extend({
 
   filterContainers: function(searchValue) {
     var params = {
-      sort: 'title',
-      filter: {
-        title: searchValue
-      }
+      sort: 'title'
     };
+    if (searchValue) {
+      params['filter'] = {
+        title: searchValue
+      };
+    } else {
+      params['page'] = {
+        size: env.defaultNumberOfContainers,
+        number: 0
+      };
+    }
     var promises = [];
     promises.push(this.get('store').query('container-item', params));
     promises.push(this.get('store').query('container-group', params));

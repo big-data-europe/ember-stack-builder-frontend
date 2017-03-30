@@ -21,7 +21,8 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
-    searchDebounceMiliseconds: 250
+    searchDebounceMiliseconds: 250,
+    defaultNumberOfContainers: 2
   };
 
   if (environment === 'development') {
