@@ -11,26 +11,14 @@ export default DS.Model.extend({
 
   relatedContainerItems: Ember.computed('relations', 'relations.[]', function() {
     return this.get('relations').then(function(relations) {
-      var promises = [];
-
-      relations.forEach(function(rel) {
-        promises.push(rel.get('item'));
-      });
-
-      return RSVP.all(promises).then((promiseResults) => {
-        return promiseResults;
-      });
+      return RSVP.all(relations.sortBy('index').mapBy('item'));
     });
   }),
 
   dockerText: Ember.computed('relatedContainerItems', function() {
     let relatedItems = this.get('relatedContainerItems');
     return relatedItems.then(function(items) {
-      var dockerText = "";
-      items.forEach(function(item) {
-        dockerText += item.get('dockerText') + '\n';
-      });
-      return dockerText;
+      return items.mapBy('dockerText').join('\n');
     });
   })
 });
