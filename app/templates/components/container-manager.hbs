@@ -14,7 +14,7 @@
         {{#if containerList.lastSuccessful.value}}
 
           {{#md-collection content=containerList.lastSuccessful.value class="container-search-results" as |element|}}
-            <div class="result-element">
+            <div class="result-element" {{action 'addDockerText' element.item}}>
               {{#if (eq element.type 'container-group')}}
                 <div class="container-group-result-element">
                   {{container-group-component model = element.item}}

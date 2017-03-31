@@ -2,10 +2,12 @@
   .edit,
   .new {
     display: inline-block;
-    width: 60%;
+    width: 90%;
 
     .text-editor {
       padding-top: 7%;
+      display: inline-block;
+      width: 70%;
 
       .container {
         textarea {
@@ -15,18 +17,18 @@
           border-radius: 0;
           outline: none;
           resize: none;
-
           padding: 1.6rem 0;
           overflow-y: hidden;
           width: 100%;
           font-size: 1rem;
-          margin: 0 0 15px 0;
+          margin: 0 0 15px;
 
           &:focus {
             border-bottom: 1px solid #78909c;
             box-shadow: 0 1px 0 0 #78909c;
           }
         }
+
         .card-action {
           .default-actions {
             display: inline-block;
@@ -38,60 +40,67 @@
         }
       }
     }
-  }
 
-  .container-manager {
-    display: inline-block;
-    width: 35%;
-    position: absolute;
-    top: 15%;
+    .container-manager {
+      display: inline-block;
+      width: 25%;
+      padding-top: 7%;
+      position: absolute;
+      top: 5%;
 
-    .search {
-      i {
-        margin-left: 1%;
-        font-size: 24px;
-        color: $secondary-color;
-        display: inline-block;
-      }
-
-      input {
-        display: inline-block;
-        width: 85%;
-      }
-    }
-
-    .preloader-wrapper {
-      margin-left: 40%;
-    }
-
-    .container-search-results {
-      .result-element {
-        span {
-          &.title {
-            font-weight: 500;
-            font-size: 14px;
-          }
+      .search {
+        i {
+          margin-left: 1%;
+          font-size: 24px;
+          color: $secondary-color;
+          display: inline-block;
         }
 
-        .container-group-result-element {
-          .collection-item {
-            background: lighten($secondary-color, 40%);
+        input {
+          display: inline-block;
+          width: 85%;
+        }
+      }
 
-            .container-element {
+      .preloader-wrapper {
+        margin-left: 40%;
+      }
+
+      .container-search-results {
+        .result-element {
+          cursor: pointer;
+          span {
+            &.title {
+              font-weight: 500;
+              font-size: 14px;
+            }
+          }
+
+          .container-group-result-element {
+            .collection-item {
+              background: lighten($secondary-color, 40%);
+
+              .container-element {
+                background-color: lighten($primary-color, 30%);
+              }
+
+              p {
+                font-style: italic;
+                font-size: 11px;
+                padding-top: 5%;
+              }
+
+              .container-badge {
+                color: lighten($primary-color, 15%) !important;
+                background-color: darken($secondary-color, 0%) !important;
+              }
+            }
+          }
+
+          .container-result-element {
+            .collection-item {
               background-color: lighten($primary-color, 30%);
             }
-
-            p {
-              font-style: italic;
-              font-size: 11px;
-              padding-top: 5%;
-            }
-          }
-        }
-
-        .container-result-element {
-          .collection-item {
-            background-color: lighten($primary-color, 30%);
           }
         }
       }

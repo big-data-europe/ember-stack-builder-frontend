@@ -4,6 +4,10 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
   didInsertElement: function() {
     this._super();
+    this.recalculateTextareaSize();
+  },
+
+  recalculateTextareaSize: function() {
     Ember.run.later(function() {
       Ember.$.each(Ember.$('textarea'), function() {
         // this sets the 'rows' attribute depending on the text length inside the text area

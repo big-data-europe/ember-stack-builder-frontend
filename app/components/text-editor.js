@@ -5,6 +5,13 @@ export default Ember.Component.extend(ResizeTextareaMixin, {
   allowDelete: false,
   showDialog: false,
   classNames: ['text-editor'],
+
+  // We need this in case we drag'n'drop dockerText to the text of our dockerfile
+  // the size of the textarea should be recalculated
+  textAreaObserver: Ember.observer('model.text', function() {
+    this.recalculateTextareaSize();
+  }),
+
   actions: {
     save: function() {
       this.get('model').save();
