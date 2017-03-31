@@ -1,25 +1,27 @@
-  <div class="container">
-    {{#md-card}}
-      {{#md-card-content}}
-        <div class="row">
-          {{md-input type="text" value=model.title label="Title" }}
-        </div>
-        <div class="row">
+<div class="container">
+  {{#md-card}}
+    {{#md-card-content}}
+      <div class="row">
+        {{md-input type="text" value=model.title label="Title" }}
+      </div>
+      <div class="row">
+        {{#draggable-object-target action="addDockerText"}}
           {{textarea value=model.text label="Text" }}
+        {{/draggable-object-target}}
+      </div>
+    {{/md-card-content}}
+    {{#md-card-action}}
+      <div class="default-actions">
+        {{md-btn text='Save' action='save'}} {{md-btn text='Cancel' action='cancel'}}
+      </div>
+      {{#if allowDelete}}
+        <div class="delete-action">
+          {{md-btn text='Delete' action='showDeleteDialog'}}
         </div>
-      {{/md-card-content}}
-      {{#md-card-action}}
-        <div class="default-actions">
-          {{md-btn text='Save' action='save'}} {{md-btn text='Cancel' action='cancel'}}
-        </div>
-        {{#if allowDelete}}
-          <div class="delete-action">
-            {{md-btn text='Delete' action='showDeleteDialog'}}
-          </div>
-        {{/if}}
-      {{/md-card-action}}
-    {{/md-card}}
-  </div>
+      {{/if}}
+    {{/md-card-action}}
+  {{/md-card}}
+</div>
 
 {{#if showDialog}}
   {{confirmation-dialog buttonText='Delete' text="Delete this Docker Compose file?" closeDialog=(action 'closeDialog') action='delete' delete=(action 'delete')}}
