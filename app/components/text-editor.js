@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ResizeTextareaMixin from '../mixins/resize-textarea';
+import RSVP from 'rsvp';
 
 export default Ember.Component.extend(ResizeTextareaMixin, {
   allowDelete: false,
@@ -40,7 +41,7 @@ export default Ember.Component.extend(ResizeTextareaMixin, {
       let itemDockerText = item.get('dockerText');
       // this can be either a promise or not, so it's better
       // to always handle it as if it was a promise
-      Promise.resolve(itemDockerText).then((dockerText) => {
+      RSVP.Promise.resolve(itemDockerText).then((dockerText) => {
         this.sendAction('addDockerText', dockerText);
       });
     }
