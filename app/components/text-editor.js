@@ -1,9 +1,11 @@
 import Ember from 'ember';
 import ResizeTextareaMixin from '../mixins/resize-textarea';
 import RSVP from 'rsvp';
+import FileSaver from 'ember-cli-file-saver/mixins/file-saver';
 
-export default Ember.Component.extend(ResizeTextareaMixin, {
+export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, {
   allowDelete: false,
+  allowDownload: false,
   showDialog: false,
   classNames: ['text-editor'],
 
@@ -14,6 +16,12 @@ export default Ember.Component.extend(ResizeTextareaMixin, {
   }),
 
   actions: {
+    download: function() {
+      let url = "/stack-builder-backend/" + this.get('model.id');
+      Ember.$.get(url,
+        (content) => this.saveFileAs("docker-compose.yml", content, "application/x-yaml"));
+      return false;
+    },
     save: function() {
       this.get('model').save();
       this.sendAction('goToCompactView');

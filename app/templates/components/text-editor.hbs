@@ -19,6 +19,11 @@
           {{md-btn text='Delete' action='showDeleteDialog'}}
         </div>
       {{/if}}
+      {{#if allowDownload}}
+        <div class="default-actions">
+          {{md-btn text='Download' action='download'}}
+        </div>
+      {{/if}}
     {{/md-card-action}}
   {{/md-card}}
 </div>
