@@ -54,16 +54,5 @@ export default Ember.Component.extend({
       }
       return results;
     });
-  },
-
-  actions: {
-    addDockerText: function(item) {
-      let itemDockerText = item.get('dockerText');
-      // this can be either a promise or not, so it's better
-      // to always handle it as if it was a promise
-      RSVP.Promise.resolve(itemDockerText).then((dockerText) => {
-        this.sendAction('addDockerText', dockerText);
-      });
-    }
   }
 });

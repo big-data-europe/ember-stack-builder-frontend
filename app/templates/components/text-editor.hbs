@@ -1,30 +1,6 @@
 <div class="container">
   {{#md-card}}
-    {{#md-card-content}}
-      <div class="row">
-        {{md-input type="text" value=model.title label="Title" }}
-      </div>
-      <div class="row">
-        {{#draggable-object-target action="addDockerText"}}
-          {{textarea value=model.text label="Text" }}
-        {{/draggable-object-target}}
-      </div>
-    {{/md-card-content}}
-    {{#md-card-action}}
-      <div class="default-actions">
-        {{md-btn text='Save' action='save'}} {{md-btn text='Cancel' action='cancel'}}
-      </div>
-      {{#if allowDelete}}
-        <div class="delete-action">
-          {{md-btn text='Delete' action='showDeleteDialog'}}
-        </div>
-      {{/if}}
-      {{#if allowDownload}}
-        <div class="default-actions">
-          {{md-btn text='Download' action='download'}}
-        </div>
-      {{/if}}
-    {{/md-card-action}}
+    {{docker-compose-form changeset=(changeset model) allowDelete=allowDelete allowDownload=allowDownload showDeleteDialog=(action 'showDeleteDialog')}}
   {{/md-card}}
 </div>
 
