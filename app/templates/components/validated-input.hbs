@@ -1,0 +1,10 @@
+<div class="{{if red 'red-input'}}">
+  {{#if (eq type 'input')}}
+    {{md-input type="text" value=value label=label }}
+  {{else if (eq type "textarea")}}
+  <div class="input-field">
+    {{textarea value=value label=label }}
+    <label id="textarea-label-{{label}}" >{{label}}</label>
+  </div>
+  {{/if}}
+</div>

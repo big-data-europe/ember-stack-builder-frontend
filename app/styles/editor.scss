@@ -29,6 +29,18 @@
           }
         }
 
+        .red-input {
+          input,
+          textarea {
+            border-bottom-color: red;
+
+            &:focus {
+              border-bottom: 1px solid red;
+              box-shadow: 0 1px 0 0 red;
+            }
+          }
+        }
+
         .card-action {
           .default-actions {
             display: inline-block;
@@ -69,6 +81,7 @@
       .container-search-results {
         .result-element {
           cursor: pointer;
+
           span {
             &.title {
               font-weight: 500;

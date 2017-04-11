@@ -1,10 +1,10 @@
 {{#md-card-content}}
   <div class="row">
-    {{md-input type="text" value=changeset.title label="Title" }}
+    {{validated-input type="input" value=changeset.title label="Title" red=changeset.error.title}}
   </div>
   <div class="row">
     {{#draggable-object-target action="addDockerText" }}
-      {{textarea value=changeset.text label="Text" }}
+      {{validated-input type='textarea' value=changeset.text label="Text" red=changeset.error.text}}
     {{/draggable-object-target}}
   </div>
 {{/md-card-content}}
