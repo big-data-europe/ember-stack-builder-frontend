@@ -11,7 +11,7 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, {
   }),
 
   disabledButton: Ember.computed('changeset.changes', 'changeset.changes.[]', function() {
-    return this.get('changeset.changes.length') == 0;
+    return this.get('changeset.changes.length') === 0;
   }),
 
   actions: {

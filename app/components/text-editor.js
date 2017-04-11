@@ -17,9 +17,7 @@ export default Ember.Component.extend({
     },
     delete: function() {
       this.set('showDialog', false);
-      this.get('model').destroyRecord().then(() => {
-        this.sendAction('goToCompactView');
-      });
+      this.sendAction('delete');
     }
   }
 });

@@ -4,6 +4,16 @@ import {
 } from 'ember-changeset-validations/validators';
 
 export default {
-  title: validateLength({min: 30}),
-  text: validatePresence(true)
-}
+  title: [
+    validatePresence(true),
+    validateLength({
+      min: 1
+    })
+  ],
+  text: [
+    validatePresence(true),
+    validateLength({
+      min: 1
+    })
+  ]
+};
