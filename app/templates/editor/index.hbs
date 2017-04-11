@@ -1,4 +1,4 @@
 <div class="new">
-  {{text-editor model=model goToCompactView=(action 'goToCompactView')}}
+  {{text-editor changeset=(changeset model DockerComposeValidations) goToCompactView=(action 'goToCompactView') newFile=true}}
   {{container-manager}}
 </div>

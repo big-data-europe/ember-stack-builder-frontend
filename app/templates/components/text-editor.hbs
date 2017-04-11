@@ -1,6 +1,6 @@
 <div class="container">
   {{#md-card}}
-    {{docker-compose-form changeset=changeset allowDelete=allowDelete allowDownload=allowDownload showDeleteDialog=(action 'showDeleteDialog')}}
+    {{docker-compose-form changeset=changeset allowDelete=allowDelete allowDownload=allowDownload showDeleteDialog=(action 'showDeleteDialog')   goToCompactView=(action 'goToCompactView') newFile=newFile}}
   {{/md-card}}
 </div>
 

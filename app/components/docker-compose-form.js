@@ -10,8 +10,17 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, {
     this.recalculateTextareaSize();
   }),
 
-  disabledButton: Ember.computed('changeset.changes', 'changeset.changes.[]', function() {
-    return this.get('changeset.changes.length') === 0;
+  disabledSaveButton: Ember.computed('changeset.changes', 'changeset.changes.[]', 'changeset.errors', 'changeset.errors.[]', 'newFile', function() {
+    if (this.get('newFile') === true) {
+      return false;
+    }
+    return this.get('changeset.errors.length') > 0 || this.get('changeset.changes.length') === 0;
+  }),
+  disabledCancelButton: Ember.computed('changeset.changes', 'changeset.changes.[]', 'changeset.errors', 'changeset.errors.[]', 'newFile', function() {
+    if (this.get('changeset.errors.length') > 0) {
+      return false;
+    }
+    return this.get('newFile') === false && this.get('changeset.changes.length') === 0;
   }),
 
   actions: {
@@ -32,10 +41,17 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, {
     },
     cancel: function() {
       this.get('changeset').rollback();
+      if (this.get('newFile')) {
+        this.sendAction('goToCompactView');
+        return true;
+      }
       return false;
     },
     save: function() {
       this.get('changeset').save();
+      this.set('newFile', false);
+      this.set('allowDownload', true);
+      this.set('allowDelete', true);
       return false;
     },
     download: function() {

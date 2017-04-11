@@ -10,7 +10,8 @@
 {{/md-card-content}}
 {{#md-card-action}}
   <div class="default-actions">
-    {{md-btn text='Save' isDisabled=disabledButton disabled=disabledButton action='save'}} {{md-btn text='Cancel' isDisabled=disabledButton disabled=disabledButton action='cancel'}}
+    {{md-btn text='Save' isDisabled=disabledSaveButton disabled=disabledSaveButton action='save'}}
+    {{md-btn text='Cancel' isDisabled=disabledCancelButton disabled=disabledCancelButton action='cancel'}}
   </div>
   {{#if allowDelete}}
     <div class="delete-action">
