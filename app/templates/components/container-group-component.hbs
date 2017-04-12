@@ -1,8 +1,11 @@
-<span class='title'>{{model.title}}</span>
-{{#md-badge class='container-badge white-text' }}
-  {{model.numberOfContainers}}
-{{/md-badge}}
-<p>This group contains the followings:</p>
-{{#md-collection content=(await model.relatedContainerItems) as |item|}}
-  {{container-component model=item}}
-{{/md-collection}}
+<div class="label">This group contains the followings:</div> <br>
+<ul class="related-container-items">
+  {{#each (await model.relatedContainerItems) as |item index|}}
+    <li>{{add index 1}}. {{item.title}}</li>
+  {{/each}}
+</ul>
+<div class="label">Docker Compose snippet:</div>
+{{!-- don't put spaces in front of this, it messes up the pre-wrap! --}}
+<div class="docker-text">
+{{await model.dockerText}}
+</div>

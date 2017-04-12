@@ -1,1 +1,11 @@
-{{model.title}}
+<div class="label">Repository:</div>
+<div class="link">
+  <a href= {{model.repository}} target="_blank">
+    {{model.repository}}
+  </a>
+</div>
+<div class="label">Docker Compose snippet:</div>
+{{!-- don't put spaces in front of this, it messes up the pre-wrap! --}}
+<div class="docker-text">
+{{model.dockerText}}
+</div>

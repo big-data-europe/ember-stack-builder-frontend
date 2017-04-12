@@ -7,33 +7,30 @@
       </div>
     </div>
 
-    <div class="container">
       {{#if containerList.isRunning}}
         {{md-loader mode="circular" size=small}}
       {{else}}
         {{#if containerList.lastSuccessful.value}}
           <label>To add items from the list to your docker-compose file simply drag and drop them into the text field.</label>
-          {{#md-collection content=containerList.lastSuccessful.value class="container-search-results" as |element|}}
-            {{#draggable-object content=element.item}}
-              <div class="result-element">
-                {{#if (eq element.type 'container-group')}}
-                  <div class="container-group-result-element">
-                    {{container-group-component model = element.item}}
-                  </div>
-                  {{else if (eq element.type 'container-item')}}
-                  <div class="container-result-element">
-                    <span class='title'>{{container-component model = element.item}}</span>
-                  </div>
-                {{/if}}
-              </div>
-            {{/draggable-object}}
-          {{/md-collection}}
-
+          <div class="container-search-results">
+            {{#md-card-collapsible accordion=false}}
+              {{#each containerList.lastSuccessful.value as |element|}}
+                  {{#md-collapsible title=element.item.title class="result-element" icon=element.item.icon}}
+                    {{#draggable-object content=element.item}}
+                      {{#if (eq element.type 'container-group')}}
+                        {{container-group-component model = element.item}}
+                      {{else if (eq element.type 'container-item')}}
+                        {{container-component model = element.item}}
+                      {{/if}}
+                    {{/draggable-object}}
+                  {{/md-collapsible}}
+              {{/each}}
+            {{/md-card-collapsible}}
+          </div>
         {{else}}
           No containers to show
         {{/if}}
       {{/if}}
-    </div>
 
   {{/md-card-content}}
 {{/md-card}}
