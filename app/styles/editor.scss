@@ -1,14 +1,12 @@
 .editor {
   .edit,
   .new {
-    display: inline-block;
-    width: 90%;
+    display: grid;
+    padding: 7% 7% 0 0;
+    grid-template-columns: 70% auto;
+    grid-template-rows: auto;
 
     .text-editor {
-      padding-top: 7%;
-      display: inline-block;
-      width: 70%;
-
       .container {
         textarea {
           background-color: transparent;
@@ -54,12 +52,6 @@
     }
 
     .container-manager {
-      display: inline-block;
-      width: 25%;
-      padding-top: 5%;
-      position: absolute;
-      top: 15%;
-
       .search {
         i {
           margin-left: 1%;
