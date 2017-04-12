@@ -12,7 +12,7 @@
         {{md-loader mode="circular" size=small}}
       {{else}}
         {{#if containerList.lastSuccessful.value}}
-
+          <label>To add items from the list to your docker-compose file simply drag and drop them into the text field.</label>
           {{#md-collection content=containerList.lastSuccessful.value class="container-search-results" as |element|}}
             {{#draggable-object content=element.item}}
               <div class="result-element">
