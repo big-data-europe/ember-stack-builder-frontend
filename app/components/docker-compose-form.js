@@ -55,9 +55,11 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, {
       return false;
     },
     download: function() {
-      let url = "/stack-builder-backend/" + this.get('changeset.id');
-      Ember.$.get(url,
-        (content) => this.saveFileAs("docker-compose.yml", content, "application/x-yaml"));
+      this.get('changeset').save().then(() => {
+        let url = "/stack-builder-backend/" + this.get('changeset.id');
+        Ember.$.get(url,
+          (content) => this.saveFileAs("docker-compose.yml", content, "application/x-yaml"));
+      });
       return false;
     }
   }
