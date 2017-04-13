@@ -1,17 +1,13 @@
 <div class="collapsible-header {{if active 'active'}}" {{action "headerClicked"}}>
-  {{#if icon}}
-    {{bw-compat-icon icon extraClasses=iconPosition}}
-  {{/if}}
-
-  {{title}}
-
-  {{#if badge}}
-    <span class="badge">
-      {{badge}}
-    </span>
+  {{#if draggableElement}}
+    {{#draggable-object content=draggableElement}}
+      {{md-collapsible-header title=title icon=icon iconPosition=iconPosition badge=badge}}
+    {{/draggable-object}}
+  {{else}}
+    {{md-collapsible-header title=title icon=icon iconPosition=iconPosition badge=badge}}
   {{/if}}
 </div>
 
 <div class="collapsible-body">
-    <p>{{yield}}</p>
+  <p>{{yield}}</p>
 </div>

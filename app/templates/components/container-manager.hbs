@@ -15,7 +15,7 @@
           <div class="container-search-results">
             {{#md-card-collapsible accordion=false}}
               {{#each containerList.lastSuccessful.value as |element|}}
-                  {{#md-collapsible title=element.item.title class="result-element" badge=element.item.numberOfContainers}}
+                  {{#md-collapsible title=element.item.title class="result-element" badge=element.item.numberOfContainers draggableElement=element.item}}
                     {{#draggable-object content=element.item}}
                       {{#if (eq element.type 'container-group')}}
                         {{container-group-component model = element.item}}
