@@ -5,6 +5,5 @@ export default DS.Model.extend({
   title: attr('string'),
   repository: attr('string'),
   dockerText: attr('string'),
-  relations: DS.hasMany('container-relation'),
-  icon: "filter"
+  relations: DS.hasMany('container-relation')
 });

@@ -20,15 +20,5 @@ export default DS.Model.extend({
     return relatedItems.then(function(items) {
       return items.mapBy('dockerText').join('\n');
     });
-  }),
-  icon: Ember.computed('numberOfContainers', function() {
-    let numberOfContainers = this.get('numberOfContainers');
-    if (numberOfContainers === 0) {
-      return "filter_none";
-    }
-    if (numberOfContainers > 9) {
-      return "filter_9_plus";
-    }
-    return "filter_" + this.get('numberOfContainers');
   })
 });
