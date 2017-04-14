@@ -29,9 +29,7 @@ module.exports = {
         console.log("Zipping the sources...");
         // create a file to stream archive data to.
         var output = fs.createWriteStream(project.root + '/dist.zip');
-        var archive = archiver('zip', {
-          store: true // Sets the compression method to STORE.
-        });
+        var archive = archiver('zip');
         // listen for all archive data to be written
         output.on('close', function() {
           console.log(archive.pointer() + ' total bytes');
