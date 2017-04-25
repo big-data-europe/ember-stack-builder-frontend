@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import attr from 'ember-data/attr';
+import Ember from 'ember';
 
 export default DS.Model.extend({
   title: attr('string'),
@@ -13,7 +14,7 @@ export default DS.Model.extend({
   dockerFilter: function(line) {
     // return if there is something with two spaces and
     // an alphanumeric character [A-Za-z0-9_] at the beginning.
-    return line.search(/^(  )\w+/g) == 0;
+    return line.search(/^(  )\w+/g) === 0;
   },
 
   // remove all the [^A-Za-z0-9_-] characters (non-alphanumberic)
