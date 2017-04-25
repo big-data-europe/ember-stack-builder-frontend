@@ -2,6 +2,7 @@ import Ember from 'ember';
 import ResizeTextareaMixin from '../mixins/resize-textarea';
 import FileSaver from 'ember-cli-file-saver/mixins/file-saver';
 import RSVP from 'rsvp';
+import jsyaml from 'npm:js-yaml';
 
 export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, {
   // We need this in case we drag'n'drop dockerText to the text of our dockerfile
