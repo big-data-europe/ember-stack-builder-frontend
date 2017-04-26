@@ -7,9 +7,21 @@ export default DS.Model.extend(DockerFileParser, {
   title: attr('string'),
   text: attr('string'),
 
-  // return the lines, that start with two spaces
-  dockers: Ember.computed('text', function() {
-    var yaml = this.yamlParser(this.get('text'));
-    return this.serviceNameFilter(yaml);
-  })
+  yaml: Ember.computed('text', function() {
+    return this.yamlParser(this.get('text'));
+  }),
+
+  serviceNames: Ember.computed('yaml', function() {
+    return this.serviceNameFilter(this.get('yaml'));
+  }),
+  services: Ember.computed('yaml', function() {
+    console.log(this.getServiceDetails('identifier'));
+    return this.getServices(this.get('yaml'));
+  }),
+
+  getServiceDetails: function(servicename) {
+    return this.getService(this.get('yaml'), servicename);
+  }
+
+
 });

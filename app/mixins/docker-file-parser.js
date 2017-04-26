@@ -11,6 +11,15 @@ export default Ember.Mixin.create({
   serviceNameFilter: function(yaml) {
     return this.getKeysFromObject(yaml['services']);
   },
+  getServices: function(yaml) {
+    return yaml['services'];
+  },
+  getService: function(yaml, servicename) {
+    return yaml['services'][servicename];
+  },
+  getAttributeFromService: function(yaml, servicename, attributename) {
+    return yaml['services'][servicename][attributename];
+  },
 
   // remove all the [^A-Za-z0-9_-] characters (non-alphanumberic)
   // match any character that is not in the set -> [^] is negation
