@@ -1,3 +1,4 @@
+{{!-- Docker-compose editable content --}}
 {{#md-card-content}}
   <div class="row">
     {{validated-input type="input" value=changeset.title label="Title" red=changeset.error.title}}
@@ -8,6 +9,8 @@
     {{/draggable-object-target}}
   </div>
 {{/md-card-content}}
+
+{{!-- Actions on the editable content --}}
 {{#md-card-action}}
   <div class="default-actions">
     {{md-btn text='Save' isDisabled=disabledSaveButton disabled=disabledSaveButton action='save'}}

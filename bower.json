@@ -2,6 +2,7 @@
   "name": "stack-builder",
   "dependencies": {
     "materialize": "0.97.6",
-    "FileSaver": "^1.3.3"
+    "FileSaver": "^1.3.3",
+    "jquery-textcomplete": "^1.8.0"
   }
 }

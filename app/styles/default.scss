@@ -43,3 +43,40 @@ a.button-collapse {
 html {
   overflow: scroll;
 }
+
+
+#autocomplete-textarea {
+  min-height: 80px;
+  color: #000;
+}
+#autocomplete-textarea a {
+  text-decoration: none;
+  font-weight: normal;
+  color: #181818;
+}
+.dropdown-menu .textcomplete-item a,
+.dropdown-menu .textcomplete-item a:hover {
+  cursor: pointer;
+  font-weight: normal;
+  color: #000;
+  position: relative;
+  padding: 3px 10px;
+}
+.dropdown-menu .textcomplete-item.active a {
+  background: #A8B0C0;
+}
+
+.textcomplete-dropdown {
+  background: #D7D2D2;
+}
+
+/* Highlighting of the matching part
+   of each search result */
+.dropdown-menu .textcomplete-item a em {
+  font-style: normal;
+  font-weight: bold;
+}
+.dropdown-menu .textcomplete-footer {
+  border-top: solid 1px #F0F0F0;
+  margin-top: 3px;
+}
