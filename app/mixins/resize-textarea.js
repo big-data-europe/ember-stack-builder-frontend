@@ -29,7 +29,6 @@ export default Ember.Mixin.create({
           Ember.$(el).css('height', 'auto').css('height', el.scrollHeight + offset);
         };
         Ember.$(this).on('keyup input', function() {
-          Ember.$(this).removeAttr('rows');
           resizeTextarea(this);
         });
       });

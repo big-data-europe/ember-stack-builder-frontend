@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   moveLabel() {
     // make sure the label moves when a value is bound.
     const $label = Ember.$('#textarea-label-' + this.get('label'));
+
     if (Ember.isPresent(this.get('value')) && !$label.hasClass('active')) {
       $label.addClass('active');
     }
@@ -17,5 +18,5 @@ export default Ember.Component.extend({
     if (this.get('type') === "textarea") {
       this.moveLabel();
     }
-  }),
+  })
 });
