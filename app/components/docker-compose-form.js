@@ -2,8 +2,9 @@ import Ember from 'ember';
 import ResizeTextareaMixin from '../mixins/resize-textarea';
 import FileSaver from 'ember-cli-file-saver/mixins/file-saver';
 import RSVP from 'rsvp';
+import DockerFileParser from '../mixins/docker-file-parser';
 
-export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, {
+export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, DockerFileParser, {
   // We need this in case we drag'n'drop dockerText to the text of our dockerfile
   // the size of the textarea should be recalculated
 
@@ -16,20 +17,39 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, {
       let that = this;
 
       Ember.$('#textarea-autocomplete').textcomplete([{
-          match: /(^|\b)(\w{2,})$/,
-          search: function (term, callback) {
-              callback(that.get('drcServiceNames').filter(function(service) {
-                return service.includes(term);
-              }));
-          },
-          replace: function (word) {
-              return word;
-          }
+        match: /(^|\b)(\w{2,})$/,
+        search: function(term, callback) {
+          callback(that.get('drcServiceNames').filter(function(service) {
+            return service.includes(term);
+          }));
+        },
+        replace: function(word) {
+          return word;
+        }
       }]);
     });
+
+    try {
+      var yaml = this.yamlParser(this.get('changeset.text'));
+      var services = this.serviceNameFilter(yaml);
+      this.set('oldServices', services);
+    } catch (err) {
+      this.set('oldServices', []);
+    }
   },
 
-  drcServiceNames: Ember.computed.oneWay('changeset.serviceNames'),
+  oldServices: [],
+  drcServiceNames: Ember.computed('changeset.text', function() {
+    try {
+      var yaml = this.yamlParser(this.get('changeset.text'));
+      var services = this.serviceNameFilter(yaml);
+      this.set('oldServices', services);
+      return services;
+    } catch (err) {
+      console.log(err);
+      return this.get('oldServices');
+    }
+  }),
 
   textAreaObserver: Ember.observer('changeset.text', function() {
     this.recalculateTextareaSize();
