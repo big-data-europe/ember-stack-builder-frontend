@@ -15,7 +15,6 @@ export default DS.Model.extend(DockerFileParser, {
     return this.serviceNameFilter(this.get('yaml'));
   }),
   services: Ember.computed('yaml', function() {
-    console.log(this.getServiceDetails('identifier'));
     return this.getServices(this.get('yaml'));
   }),
 
