@@ -20,7 +20,7 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, DockerFile
   },
 
   // Every jQuery event needs to be wrapped inside the ember run loop
-  didInsertElement: () {
+  didInsertElement() {
     Ember.$('#textarea-autocomplete').on('keydown', this.setupTextAreaTab);    
 
     document.addEventListener('keyup', () => {
@@ -158,6 +158,7 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, DockerFile
         }
       });
     }
+    else return [];
   },
 
   // Get the path in the docker-compose yml object where the cursor is.
