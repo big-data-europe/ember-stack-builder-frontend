@@ -12,7 +12,7 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, DockerFile
     if (evt.keyCode === 9) {
       start = this.selectionStart;
       end = this.selectionEnd;
-      that = $(this);
+      that = Ember.$(this);
       that.val(that.val().substring(0, start) + "\t" + that.val().substring(end));
       this.selectionStart = this.selectionEnd = start + 1;
       return false;
@@ -22,7 +22,7 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, DockerFile
   // Every jQuery event needs to be wrapped inside the ember run loop
   didInsertElement() {
 
-    $('#textarea-autocomplete').on('keydown', this.setupTextAreaTab);
+    Ember.$('#textarea-autocomplete').on('keydown', this.setupTextAreaTab);
 
     Ember.run.scheduleOnce('afterRender', this, function() {
       // This is necessary because the addition of this addon resets scroll
