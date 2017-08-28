@@ -8,6 +8,12 @@
       {{validated-input type='textarea' value=changeset.text label="Text" red=changeset.error.text}}
     {{/draggable-object-target}}
   </div>
+
+  {{#if yamlError}}
+      <p>Error</p>
+      <span><strong>{{yamlErrorMessage}}</strong></span>
+  {{/if}}
+
 {{/md-card-content}}
 
 {{!-- Actions on the editable content --}}

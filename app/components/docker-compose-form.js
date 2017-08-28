@@ -20,9 +20,12 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, DockerFile
   },
 
   // Every jQuery event needs to be wrapped inside the ember run loop
-  didInsertElement() {
+  didInsertElement: () {
+    Ember.$('#textarea-autocomplete').on('keydown', this.setupTextAreaTab);    
 
-    Ember.$('#textarea-autocomplete').on('keydown', this.setupTextAreaTab);
+    document.addEventListener('keyup', () => {
+      this.getCursorYmlPath();
+    });
 
     Ember.run.scheduleOnce('afterRender', this, function() {
       // This is necessary because the addition of this addon resets scroll
@@ -64,6 +67,111 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, DockerFile
       return this.get('oldServices');
     }
   }),
+
+  yamlObject: Ember.computed('changeset.text', function() {
+    try {
+      const yaml = this.yamlParser(this.get('changeset.text'));
+      this.setProperties({
+        yamlErrorMessage: '',
+        yamlError: false
+      });
+      return yaml;
+    }
+    catch (err) {
+      this.setProperties({
+        yamlErrorMessage: err,
+        yamlError: true
+      });
+      return null;
+    }
+  }),
+
+
+  // Get indices of all ocurrences of string in a string
+  getIndicesOf(searchStr, str) {
+      let searchStrLen = searchStr.length;
+      if (searchStrLen === 0) {
+          return [];
+      }
+      let startIndex = 0, index, indices = [];
+      while ((index = str.indexOf(searchStr, startIndex)) > -1) {
+          indices.push(index);
+          startIndex = index + searchStrLen;
+      }
+      return indices;
+  },
+
+  // Returns the padding of a string from the cursor index to a direction until
+  // it ends or finds any stop character.
+  stringPad(direction) {
+    return function (text, cursor) {
+      let stopChars = ['\n', '\t'];
+      let i = cursor;
+      while (stopChars.indexOf(text[i]) === -1 && i > 0 && i < text.length) {
+        if (direction === 'right') {
+          i = i + 1;
+        }
+        else if (direction === 'left') {
+          i = i - 1;
+        }
+        else {
+          break;
+        }
+      }
+      if (direction === 'right') {
+        return { 
+          text: text.slice(cursor, i), 
+          index: i 
+        };
+      }
+      else if (direction === 'left') {
+        return { 
+          text: text.slice(i, cursor), 
+          index: i 
+        };
+      }
+      else {
+        return { text: "", index: -1 };
+      }
+    };
+  },
+
+  // Get an array of drc yml object paths that have the context string as a match.
+  getYmlPathMatches(contextString, yaml, currentPath) {
+    if (yaml && yaml !== null) {
+      var currentPath = currentPath || "root";
+
+      return Object.keys(yaml).map((key) => {
+        if (typeof yaml[key] === "object" && yaml[key] !== null) {
+          if (contextString.includes(key)) {
+            return [`${currentPath}.${key}`].concat(this.getYmlPathMatches(contextString, yaml[key], `${currentPath}.${key}`));
+          }          
+          else {
+            return this.getYmlPathMatches(contextString, yaml[key], `${currentPath}.${key}`);
+          }
+        }
+        else {
+          if (contextString.includes(key) || contextString.includes(yaml[key])) {
+            return `${currentPath}.${key}`;
+          }
+          else return [];
+        }
+      });
+    }
+  },
+
+  // Get the path in the docker-compose yml object where the cursor is.
+  getCursorYmlPath() {
+    const text = this.get('changeset.text');
+    const cursorPosition = Ember.$('#textarea-autocomplete').prop("selectionStart");
+    const stringLeft = this.stringPad('left');
+    const stringRight = this.stringPad('right');
+    const contextString = `${stringLeft(text, cursorPosition).text.trim()}${stringRight(text, cursorPosition).text.trim()}`;
+    const pathMatches = this.getYmlPathMatches(contextString, this.get('yamlObject')).flatten();
+    const tramo = text.length / pathMatches.length;
+    const probableIndex = Math.floor(cursorPosition / tramo);
+    return pathMatches[probableIndex];
+  },
 
   textAreaObserver: Ember.observer('changeset.text', function() {
     this.recalculateTextareaSize();
