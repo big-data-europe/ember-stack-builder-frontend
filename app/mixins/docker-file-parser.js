@@ -9,16 +9,16 @@ export default Ember.Mixin.create({
     return dockerText.split('\n').filter(this.serviceNameFilter).map(this.removeUnsuportedCharacters);
   },
   serviceNameFilter: function(yaml) {
-    return this.getKeysFromObject(yaml['services']);
+    return this.getKeysFromObject(yaml.services);
   },
   getServices: function(yaml) {
-    return yaml['services'];
+    return yaml.services;
   },
   getService: function(yaml, servicename) {
-    return yaml['services'][servicename];
+    return yaml.services[servicename];
   },
   getAttributeFromService: function(yaml, servicename, attributename) {
-    return yaml['services'][servicename][attributename];
+    return yaml.services[servicename][attributename];
   },
 
   // remove all the [^A-Za-z0-9_-] characters (non-alphanumberic)
