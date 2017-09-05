@@ -6,6 +6,8 @@ import DockerFileParser from '../mixins/docker-file-parser';
 
 export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, DockerFileParser, {
 
+  mockService: Ember.inject.service('mock-hint'),
+
   // We need this in case we drag'n'drop dockerText to the text of our dockerfile
   // the size of the textarea should be recalculated
   setupTextAreaTab(evt) {
@@ -24,9 +26,9 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, DockerFile
   didInsertElement() {
     Ember.$('#textarea-autocomplete').on('keydown', this.setupTextAreaTab);    
 
-    document.addEventListener('keyup', () => {
-      this.getCursorYmlPath();
-    });
+    // document.addEventListener('keyup', () => {
+    //   this.getCursorYmlPath();
+    // });
 
     Ember.run.scheduleOnce('afterRender', this, function() {
       // This is necessary because the addition of this addon resets scroll
@@ -37,9 +39,10 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, DockerFile
       Ember.$('#textarea-autocomplete').textcomplete([{
         match: /(^|\b)(\w{2,})$/,
         search: function(term, callback) {
-          callback(that.get('drcServiceNames').filter(function(service) {
-            return service.includes(term);
-          }));          
+          const cursorPath = that.getCursorYmlPath(true);
+          const yamlObect = that.get('yamlObject');
+          let res = that.get('mockService').getHints(cursorPath, yamlObect);
+          callback(res);
         },
         replace: function(word) {
           return word;
