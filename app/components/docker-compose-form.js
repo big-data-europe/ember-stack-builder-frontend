@@ -5,6 +5,7 @@ import RSVP from 'rsvp';
 import DockerFileParser from '../mixins/docker-file-parser';
 
 export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, DockerFileParser, {
+
   // We need this in case we drag'n'drop dockerText to the text of our dockerfile
   // the size of the textarea should be recalculated
   setupTextAreaTab(evt) {
@@ -38,7 +39,7 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, DockerFile
         search: function(term, callback) {
           callback(that.get('drcServiceNames').filter(function(service) {
             return service.includes(term);
-          }));
+          }));          
         },
         replace: function(word) {
           return word;
@@ -103,11 +104,12 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, DockerFile
 
   // Returns the padding of a string from the cursor index to a direction until
   // it ends or finds any stop character.
-  stringPad(direction) {
+  stringPad(direction, write) {
     return function (text, cursor) {
       let stopChars = ['\n', '\t'];
       let i = cursor;
-      while (stopChars.indexOf(text[i]) === -1 && i > 0 && i < text.length) {
+      let predicate = write ? () => stopChars.indexOf(text[i-1]) : () => stopChars.indexOf(text[i]);
+      while (predicate() === -1 && i > 0 && i < text.length) {
         if (direction === 'right') {
           i = i + 1;
         }
@@ -151,10 +153,19 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, DockerFile
           }
         }
         else {
-          if (contextString.includes(key) || contextString.includes(yaml[key])) {
-            return `${currentPath}.${key}`;
+          // Key is not of numeric type (so we are not inside an array)
+          if (isNaN(key)) {
+            if (contextString.includes(key) || contextString.includes(yaml[key])) {
+              return `${currentPath}.${key}`;
+            }
+            else return [];
           }
-          else return [];
+          else {
+            if (contextString.includes(yaml[key])) {
+              return `${currentPath}.${key}`;
+            }
+            else return [];
+          }
         }
       });
     }
@@ -162,11 +173,12 @@ export default Ember.Component.extend(ResizeTextareaMixin, FileSaver, DockerFile
   },
 
   // Get the path in the docker-compose yml object where the cursor is.
-  getCursorYmlPath() {
+  // Variable write indicates whether the user is moving cursor or typing.
+  getCursorYmlPath(write = false) {
     const text = this.get('changeset.text');
     const cursorPosition = Ember.$('#textarea-autocomplete').prop("selectionStart");
-    const stringLeft = this.stringPad('left');
-    const stringRight = this.stringPad('right');
+    const stringLeft = this.stringPad('left', write);
+    const stringRight = this.stringPad('right', write);
     const contextString = `${stringLeft(text, cursorPosition).text.trim()}${stringRight(text, cursorPosition).text.trim()}`;
     const pathMatches = this.getYmlPathMatches(contextString, this.get('yamlObject')).flatten();
     const tramo = text.length / pathMatches.length;
